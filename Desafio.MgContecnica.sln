@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.MgContecnica.API", "Desafio.MgContecnica.API\Desafio.MgContecnica.API.csproj", "{1BCCD216-5630-4B7A-9566-D15059E82593}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.MgContecnica.API", "Desafio.MgContecnica.API\Desafio.MgContecnica.API.csproj", "{1BCCD216-5630-4B7A-9566-D15059E82593}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.MgContecnica.Application", "Desafio.MgContecnica.Application\Desafio.MgContecnica.Application.csproj", "{169F3875-58A0-48CF-A475-1E878C4C102E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.MgContecnica.Application", "Desafio.MgContecnica.Application\Desafio.MgContecnica.Application.csproj", "{169F3875-58A0-48CF-A475-1E878C4C102E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.MgContecnica.IoC", "Desafio.MgContecnica.IoC\Desafio.MgContecnica.IoC.csproj", "{12C79372-2947-4716-9527-EC043E5226CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.MgContecnica.IoC", "Desafio.MgContecnica.IoC\Desafio.MgContecnica.IoC.csproj", "{12C79372-2947-4716-9527-EC043E5226CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.MgContecnica.Domain", "Desafio.MgContecnica.Domain\Desafio.MgContecnica.Domain.csproj", "{795868BE-F250-4FE1-B248-777B7C968587}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.MgContecnica.Domain", "Desafio.MgContecnica.Domain\Desafio.MgContecnica.Domain.csproj", "{795868BE-F250-4FE1-B248-777B7C968587}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.MgContecnica.Infrastructure", "Desafio.MgContecnica.Infrastructure\Desafio.MgContecnica.Infrastructure.csproj", "{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{795868BE-F250-4FE1-B248-777B7C968587}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{795868BE-F250-4FE1-B248-777B7C968587}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{795868BE-F250-4FE1-B248-777B7C968587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
