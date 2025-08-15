@@ -1,4 +1,8 @@
 
+using Desafio.MgContecnica.Infrastructure.Context;
+using Desafio.MgContecnica.IoC;
+using Microsoft.EntityFrameworkCore;
+
 namespace Desafio.MgContecnica.API
 {
     public class Program
@@ -13,6 +17,8 @@ namespace Desafio.MgContecnica.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            DependencyInjection.AddInfrastructure(builder.Services, builder.Configuration);
 
             var app = builder.Build();
 

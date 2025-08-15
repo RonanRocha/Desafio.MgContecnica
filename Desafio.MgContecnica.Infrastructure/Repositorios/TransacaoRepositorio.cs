@@ -3,11 +3,6 @@ using Desafio.MgContecnica.Domain.QueryFilters;
 using Desafio.MgContecnica.Domain.Repositorios;
 using Desafio.MgContecnica.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Desafio.MgContecnica.Infrastructure.Repositorios
 {
@@ -35,7 +30,7 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
             return transacao;
         }
 
-        public async  Task<IEnumerable<Transacao>> RecuperarTodasTransacoesAsync(TransacoesFiltroQuery filtro)
+        public async  Task<List<Transacao>> RecuperarTodasTransacoesAsync(TransacoesFiltroQuery filtro)
         {
            
             var query = _appDbContext.Transacoes
@@ -65,12 +60,14 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
 
         public async Task<Transacao> RecuperarTransacaoPorIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _appDbContext.Transacoes.FindAsync(id);
         }
 
         public async  Task<Transacao> RemoverTransacaoAsync(Transacao transacao)
         {
-            throw new NotImplementedException();
+            _appDbContext.Transacoes.Remove(transacao);
+            await _appDbContext.SaveChangesAsync();
+            return transacao;
         }
     }
 }

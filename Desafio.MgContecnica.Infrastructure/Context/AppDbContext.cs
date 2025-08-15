@@ -13,5 +13,12 @@ namespace Desafio.MgContecnica.Infrastructure.Context
 
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Transacao> Transacoes { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        }
     }
 }
