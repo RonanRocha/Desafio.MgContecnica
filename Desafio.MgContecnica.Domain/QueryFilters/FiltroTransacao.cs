@@ -2,7 +2,7 @@
 
 namespace Desafio.MgContecnica.Domain.QueryFilters
 {
-    public class TransacoesFiltroQuery : PaginacaoFiltroQuery
+    public class FiltroTransacao : FiltroPaginacao
     {
         public TipoCategoria? Tipo { get; set; }
         public int? CategoriaId { get; set; }

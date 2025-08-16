@@ -1,9 +1,13 @@
 
+using Desafio.MgContecnica.API.Converters;
 using Desafio.MgContecnica.API.Response;
 using Desafio.MgContecnica.Infrastructure.Context;
 using Desafio.MgContecnica.IoC;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Desafio.MgContecnica.API
 {
@@ -39,11 +43,21 @@ namespace Desafio.MgContecnica.API
                          return new BadRequestObjectResult(resposta);
                      };
              })
-            .AddJsonOptions(x =>
-            x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
+            .AddJsonOptions(options => {
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.Converters.Add(new JsonDateOnlyConverter());
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.MapType<DateOnly>(() => new OpenApiSchema
+                {
+                    Type = "string",
+                    Format = "date",
+                    Example = OpenApiAnyFactory.CreateFromJson("\"2025-08-16\"")
+                });
+            });
 
             DependencyInjection.AddInfrastructure(builder.Services, builder.Configuration);
 

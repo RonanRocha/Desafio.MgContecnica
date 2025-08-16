@@ -14,8 +14,10 @@ namespace Desafio.MgContecnica.IoC
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
 
-           services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
-           services.AddScoped<ICategoriaService,CategoriaService>();
+            services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+            services.AddScoped<ITransacaoRepositorio, TransacaoRepositorio>();
+            services.AddScoped<ICategoriaService,CategoriaService>();
+            services.AddScoped<ITransacaoService, TransacaoService>();
 
            services.AddDbContext<AppDbContext>(options =>
            options.UseSqlServer(configuration

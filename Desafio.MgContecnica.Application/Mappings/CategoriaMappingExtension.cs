@@ -30,15 +30,6 @@ namespace Desafio.MgContecnica.Application.Mappings
             };
 
 
-        //public static CreateCategoriaDto ToCreateCategoriaDto(this Categoria entity) =>
-        //new CreateCategoriaDto
-        //(
-        //    entity.Nome,
-        //    entity.Tipo,
-        //    entity.Status
-        //);
-
-
         // Categoria -> RecuperarCategoriaDto (com recursão nas transações)
         public static CategoriaDto ToDto(this Categoria entity) =>
             new CategoriaDto (

@@ -30,7 +30,7 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
             return transacao;
         }
 
-        public async  Task<List<Transacao>> RecuperarTodasTransacoesAsync(TransacoesFiltroQuery filtro)
+        public async  Task<List<Transacao>> RecuperarTodasTransacoesAsync(FiltroTransacao filtro)
         {
            
             var query = _appDbContext.Transacoes
@@ -50,8 +50,8 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
                 query = query.Where(t => t.Categoria.Tipo == filtro.Tipo);
 
             query = query.OrderBy(t => t.Data)
-                         .Skip((filtro.PageNumber - 1) * filtro.PageSize)
-                         .Take(filtro.PageSize)
+                         .Skip((filtro.NumeroPagina - 1) * filtro.TamanhoPagina)
+                         .Take(filtro.TamanhoPagina)
                          .AsNoTracking();
 
             return await query.ToListAsync();
