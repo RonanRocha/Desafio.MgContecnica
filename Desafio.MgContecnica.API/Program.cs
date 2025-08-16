@@ -1,6 +1,8 @@
 
+using Desafio.MgContecnica.API.Response;
 using Desafio.MgContecnica.Infrastructure.Context;
 using Desafio.MgContecnica.IoC;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Desafio.MgContecnica.API
@@ -15,6 +17,28 @@ namespace Desafio.MgContecnica.API
 
 
             builder.Services.AddControllers()
+                 .ConfigureApiBehaviorOptions(options =>
+                 {
+                     options.InvalidModelStateResponseFactory = context =>
+                     {
+                         var erros = context.ModelState
+                             .Where(e => e.Value?.Errors.Count > 0)
+                             .ToDictionary(
+                                 kvp => kvp.Key,
+                                 kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
+                             );
+
+                         var resposta = new RespostaPadraoApi<object>
+                         {
+                             Sucesso = false,
+                             Mensagem = "Erro de validação",
+                             Erros = erros.SelectMany(e => e.Value).ToList(),
+                             Dados = null
+                         };
+
+                         return new BadRequestObjectResult(resposta);
+                     };
+             })
             .AddJsonOptions(x =>
             x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

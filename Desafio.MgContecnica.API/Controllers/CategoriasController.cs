@@ -1,6 +1,8 @@
-﻿using Desafio.MgContecnica.Application.Dto;
+﻿using Desafio.MgContecnica.API.Response;
+using Desafio.MgContecnica.Application.Dto;
 using Desafio.MgContecnica.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Desafio.MgContecnica.API.Controllers
 {
@@ -19,23 +21,52 @@ namespace Desafio.MgContecnica.API.Controllers
         [HttpGet]
         public async Task<IActionResult> RecuperarTodas()
         {
-            var categorias = await _categoriaService.RecuperarCategoriasAsync();
-
-            if(!categorias.Any())
+            try
             {
-                return NotFound();
+                var categorias = await _categoriaService.RecuperarCategoriasAsync();
+
+                if (!categorias.Any())
+                {
+                    return NotFound(RespostaPadraoApi<object>.Falha("Nenhuma categoria foi encontrada"));
+                }
+
+                return Ok(RespostaPadraoApi<List<CategoriaDto>>.Ok(categorias, "Categorias listadas com sucesso"));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, RespostaPadraoApi<object>.Falha("Erro interno no servidor"));
             }
 
-            return Ok(categorias);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> CriarCategoria([FromBody] CreateCategoriaDto categoriaDto)
         {
-            var categoria = await _categoriaService.CriarCategoriaAsync(categoriaDto);
 
-            return Ok(categoria);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    var erros = ModelState.Values.SelectMany(v => v.Errors)
+                                   .Select(e => e.ErrorMessage)
+                                   .ToList();
+
+                    return BadRequest(RespostaPadraoApi<object>.Falha("Erro de validação", erros));
+                }
+                  
+
+                var categoria = await _categoriaService.CriarCategoriaAsync(categoriaDto);
+
+                return Ok(RespostaPadraoApi<object>.Ok(categoria, "Categoria registrada com sucesso"));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, RespostaPadraoApi<object>.Falha("Erro de validação"));
+            }
+
+    
         }
     }
 }
