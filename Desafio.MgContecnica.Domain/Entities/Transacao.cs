@@ -14,17 +14,22 @@ namespace Desafio.MgContecnica.Domain.Entities
         public DateTime DataUltimaAtualizacao { get; set; }
         public Categoria Categoria { get; set; }
 
-        public Transacao(string descricao, decimal valor, DateTime data, int categoriaId, string observacoes)
-        {
-            DateTime dataOperacao = DateTime.Now;   
 
+        public Transacao()
+        {
+            
+        }
+
+        public Transacao(int id, string descricao, decimal valor, DateTime data, int categoriaId, string observacoes, DateTime dataCriacao, DateTime dataUltimaAtualizacao)
+        {
+            Id = id;
             Descricao = descricao;
             Valor = valor;
             Data = data;
             CategoriaId = categoriaId;
             Observacoes = observacoes;
-            DataCriacao = dataOperacao;
-            DataUltimaAtualizacao = dataOperacao;
+            DataCriacao = dataCriacao;
+            DataUltimaAtualizacao = dataUltimaAtualizacao;
 
             ValidarTransacao();
         }

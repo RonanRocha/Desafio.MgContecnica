@@ -13,14 +13,21 @@ namespace Desafio.MgContecnica.Domain.Entities
         public List<Transacao> Transacoes { get; set; }
 
 
-        public Categoria(string nome, StatusCategoria status, TipoCategoria tipo)
+        public Categoria()
         {
-            DateTime dataOperacao = DateTime.Now;
+            
+        }
+
+
+        public Categoria(int id,string nome, StatusCategoria status, TipoCategoria tipo, DateTime dataCriacao, DateTime dataUltimaAtualizacao,List<Transacao> transacoes)
+        {
+            Id = id;
             Nome = nome;
             Status = status;
             Tipo = tipo;
-            DataCriacao = dataOperacao;
-            DataUltimaAtualizacao = dataOperacao;
+            DataCriacao = dataCriacao;
+            DataUltimaAtualizacao = dataUltimaAtualizacao;
+            Transacoes = transacoes;
             ValidarCategoria();
         }
 

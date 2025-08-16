@@ -2,7 +2,6 @@
 
 namespace Desafio.MgContecnica.Application.Dto
 {
-    public record RecuperarCategoriaDto(int Id, string Nome, TipoCategoria Tipo, StatusCategoria Status, DateTime DataCriacao, DateTime DataUltimaAtualizacao, List<RecuperarCategoriaDto> Transacoes);
-    public record CriarCategoriaDto(string Nome, TipoCategoria Tipo, StatusCategoria Status);
-    public record AtualizarCategoriasDto(string Nome, TipoCategoria Tipo, StatusCategoria Status);
+    public record CreateCategoriaDto(string Nome, TipoCategoria Tipo, StatusCategoria Status);
+    public record CategoriaDto(int Id, string Nome, TipoCategoria Tipo, StatusCategoria Status, DateTime DataCriacao, DateTime DataUltimaAtualizacao, List<TransacaoDto> Transacoes);
 }
