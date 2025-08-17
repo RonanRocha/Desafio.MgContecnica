@@ -21,6 +21,7 @@ namespace Desafio.MgContecnica.Application.Dto
 
         [Required(ErrorMessage = "CategoriaId é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "O CategoriaId deve ser maior que 0")]
+        [IsActiveAttribute(ErrorMessage = "CategoriaId inválido")]
         int CategoriaId,
 
         string? Observacoes
@@ -42,6 +43,7 @@ namespace Desafio.MgContecnica.Application.Dto
 
         [Required(ErrorMessage = "CategoriaId é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "O CategoriaId deve ser maior que 0")]
+        [IsActiveAttribute(ErrorMessage = "CategoriaId inválido")]
         int CategoriaId,
 
         string? Observacoes
