@@ -7,8 +7,9 @@ namespace Desafio.MgContecnica.Application.Mappings
     public static class TransacaoMappingExtension
     {
         // TransacaoDto -> Transacao
-        public static Transacao ToEntity(this TransacaoDto dto) =>
-            new Transacao
+        public static Transacao ToEntity(this TransacaoDto dto)
+        {
+            var entity = new Transacao
             (
                  dto.Id,
                  dto.Descricao,
@@ -18,8 +19,14 @@ namespace Desafio.MgContecnica.Application.Mappings
                  dto.Observacoes,
                  dto.DataCriacao,
                  dto.DataUltimaAtualizacao,
-                 dto.Categoria
+                 new Categoria(dto.Categoria.Id, dto.Categoria.Nome, dto.Categoria.Status, dto.Categoria.Tipo, DateTime.UtcNow, DateTime.UtcNow)
             );
+
+     
+
+            return entity;
+        }
+   
 
 
         public static Transacao ToEntity(this CriarTransacaoDto dto) =>
@@ -35,8 +42,11 @@ namespace Desafio.MgContecnica.Application.Mappings
         };
 
         // Trasacao -> TransacaoDto
-        public static TransacaoDto ToDto(this Transacao entity) =>
-            new TransacaoDto(
+        public static TransacaoDto ToDto(this Transacao entity)
+        {
+
+
+            var dto = new TransacaoDto(
                 entity.Id,
                 entity.Descricao,
                 entity.Valor,
@@ -45,8 +55,13 @@ namespace Desafio.MgContecnica.Application.Mappings
                 entity.Observacoes,
                 entity.DataCriacao,
                 entity.DataUltimaAtualizacao,
-                entity.Categoria
+                entity.Categoria != null ? new CategoriaResumoDto(entity.Categoria.Id, entity.Categoria.Nome, entity.Categoria.Tipo, entity.Categoria.Status) : null
+
             );
+
+            return dto; 
+        }
+         
            
             
 

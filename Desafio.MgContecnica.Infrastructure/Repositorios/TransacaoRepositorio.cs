@@ -30,7 +30,7 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
             return transacao;
         }
 
-        public async  Task<List<Transacao>> RecuperarTodasTransacoesAsync(FiltroTransacao filtro)
+        public async  Task<(List<Transacao> Items, int Total)> RecuperarTodasTransacoesAsync(FiltroTransacao filtro)
         {
            
             var query = _appDbContext.Transacoes
@@ -49,24 +49,31 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
             if (filtro.Tipo != null)
                 query = query.Where(t => t.Categoria.Tipo == filtro.Tipo);
 
-            query = query.OrderBy(t => t.Data)
-                         .Skip((filtro.NumeroPagina - 1) * filtro.TamanhoPagina)
-                         .Take(filtro.TamanhoPagina)
-                         .AsNoTracking();
 
-            return await query.ToListAsync();
+            var total = await query.CountAsync();
+
+            var items = await query.OrderBy(t => t.Data)
+                         .Skip((filtro.NumeroPagina.GetValueOrDefault() - 1) * filtro.TamanhoPagina.GetValueOrDefault())
+                         .Take(filtro.TamanhoPagina.GetValueOrDefault())
+                         .AsNoTracking().ToListAsync();
+
+            return (items, total);
 
         }
 
+
         public async Task<Transacao> RecuperarTransacaoPorIdAsync(int id)
         {
-            return await _appDbContext.Transacoes.FindAsync(id);
+            return await _appDbContext.Transacoes.Include(x => x.Categoria).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async  Task<Transacao> RemoverTransacaoAsync(Transacao transacao)
         {
-            _appDbContext.Transacoes.Remove(transacao);
+        
+            _appDbContext.Remove(transacao);
+
             await _appDbContext.SaveChangesAsync();
+
             return transacao;
         }
     }

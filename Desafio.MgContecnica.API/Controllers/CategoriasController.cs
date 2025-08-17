@@ -42,7 +42,7 @@ namespace Desafio.MgContecnica.API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CriarCategoria([FromBody] CreateCategoriaDto categoriaDto)
+        public async Task<IActionResult> CriarCategoria([FromBody] CriarCategoriaDto categoriaDto)
         {
 
             try

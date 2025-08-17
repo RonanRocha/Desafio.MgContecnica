@@ -14,7 +14,7 @@ namespace Desafio.MgContecnica.Application.Services
             _categoriaRepositorio = categoriaRepositorio;
         }
 
-        public async Task<CategoriaDto> CriarCategoriaAsync(CreateCategoriaDto categoriaDto)
+        public async Task<CategoriaDto> CriarCategoriaAsync(CriarCategoriaDto categoriaDto)
         {
            var categoria  = await _categoriaRepositorio.CriarCategoriaAsync(categoriaDto.ToEntity());
            return categoria.ToDto();

@@ -31,8 +31,6 @@ namespace Desafio.MgContecnica.Domain.Entities
             DataCriacao = dataCriacao;
             DataUltimaAtualizacao = dataUltimaAtualizacao;
             Categoria = categoria;
-           
-
             ValidarTransacao();
         }
 

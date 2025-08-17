@@ -6,7 +6,7 @@ namespace Desafio.MgContecnica.Application.Interfaces
     {
         Task<List<CategoriaDto>> RecuperarCategoriasAsync();
         Task<CategoriaDto> RecuperarCategoriaPorIdAsync(int id);
-        Task<CategoriaDto> CriarCategoriaAsync(CreateCategoriaDto categoriaDto);
+        Task<CategoriaDto> CriarCategoriaAsync(CriarCategoriaDto categoriaDto);
         Task AtualizarCategoriaAsync(CategoriaDto categoriaDto);
         Task RemoverCategoriaAsync(int id);
     }

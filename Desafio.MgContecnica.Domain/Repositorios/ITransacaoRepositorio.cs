@@ -5,7 +5,8 @@ namespace Desafio.MgContecnica.Domain.Repositorios
 {
     public interface ITransacaoRepositorio
     {
-        Task<List<Transacao>> RecuperarTodasTransacoesAsync(FiltroTransacao filtro);
+
+        Task<(List<Transacao> Items, int Total)> RecuperarTodasTransacoesAsync(FiltroTransacao filtro);
         Task<Transacao> RecuperarTransacaoPorIdAsync(int id);
         Task<Transacao> CriarTransacaoAsync(Transacao transacao);
         Task<Transacao> AtualizarTransacaoAsync(Transacao transacao);

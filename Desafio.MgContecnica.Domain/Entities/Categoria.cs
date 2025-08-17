@@ -19,7 +19,7 @@ namespace Desafio.MgContecnica.Domain.Entities
         }
 
 
-        public Categoria(int id,string nome, StatusCategoria status, TipoCategoria tipo, DateTime dataCriacao, DateTime dataUltimaAtualizacao,List<Transacao> transacoes)
+        public Categoria(int id,string nome, StatusCategoria status, TipoCategoria tipo, DateTime dataCriacao, DateTime dataUltimaAtualizacao)
         {
             Id = id;
             Nome = nome;
@@ -27,7 +27,6 @@ namespace Desafio.MgContecnica.Domain.Entities
             Tipo = tipo;
             DataCriacao = dataCriacao;
             DataUltimaAtualizacao = dataUltimaAtualizacao;
-            Transacoes = transacoes;
             ValidarCategoria();
         }
 

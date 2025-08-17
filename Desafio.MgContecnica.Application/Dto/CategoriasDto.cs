@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Desafio.MgContecnica.Application.Dto
 {
-    public record CreateCategoriaDto(
+    public record CriarCategoriaDto(
 
         [Required(ErrorMessage = "O Nome é obrigatório")]
         [StringLength(255, ErrorMessage = "O Nome deve ter no máximo 100 caracteres")]
@@ -17,5 +17,13 @@ namespace Desafio.MgContecnica.Application.Dto
         [EnumDataType(typeof(StatusCategoria), ErrorMessage = "Status inválido,  por favor escolha uma das opções  0 = Inativo 1 = Ativo")]
         StatusCategoria Status
     );
-    public record CategoriaDto(int Id, string Nome, TipoCategoria Tipo, StatusCategoria Status, DateTime DataCriacao, DateTime DataUltimaAtualizacao, List<TransacaoDto> Transacoes);
+
+    public record CategoriaResumoDto(
+        int Id,
+        string Nome,
+        TipoCategoria Tipo,
+        StatusCategoria Status
+    );
+
+    public record CategoriaDto(int Id, string Nome, TipoCategoria Tipo, StatusCategoria Status, DateTime DataCriacao, DateTime DataUltimaAtualizacao, List<TransacaoDto>? Transacoes);
 }
