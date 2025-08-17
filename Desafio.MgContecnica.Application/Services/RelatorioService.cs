@@ -18,7 +18,7 @@ namespace Desafio.MgContecnica.Application.Services
         public async Task<ResumoRelatorioDto> ObterResumoAsync(FiltroRelatorioDto filtroDto)
         {
             var resumoRelatorio = await _relatorioRepositorio.RecuperarResumoAsync(filtroDto.ToEntity());
-            return resumoRelatorio.ToDto();
+            return resumoRelatorio.ToDto(filtroDto);
         }
     }
 }

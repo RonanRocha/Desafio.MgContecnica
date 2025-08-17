@@ -1,7 +1,6 @@
 ﻿using Desafio.MgContecnica.API.Response;
 using Desafio.MgContecnica.Application.Dto;
 using Desafio.MgContecnica.Application.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Desafio.MgContecnica.API.Controllers
@@ -35,8 +34,8 @@ namespace Desafio.MgContecnica.API.Controllers
            
         }
 
-        [HttpGet("por-categoria")]
-        public async Task<IActionResult> RecuperarPorCategoria()
+        [HttpGet("{categoriaId}")]
+        public async Task<IActionResult> RecuperarPorCategoria(int categoriaId)
         {
             return Ok();
         }

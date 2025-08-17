@@ -11,6 +11,10 @@ namespace Desafio.MgContecnica.Application.Mappings
         {
             DataFinal = dto.DataFinal?.ToDateTime(TimeOnly.MinValue),
             DataInicial = dto.DataInicial?.ToDateTime(TimeOnly.MinValue),
+            NumeroPaginaDespesa = dto.NumeroPaginaDespesa,
+            NumeroPaginaReceita = dto.NumeroPaginaReceita,
+            TotalPaginaDespesa = dto?.TotalPaginaDespesa,
+            TotalPaginaReceita = dto?.TotalPaginaReceita,
 
         };
     }
