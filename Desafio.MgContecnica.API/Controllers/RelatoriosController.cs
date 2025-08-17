@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Desafio.MgContecnica.API.Response;
+using Desafio.MgContecnica.Application.Dto;
+using Desafio.MgContecnica.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Desafio.MgContecnica.API.Controllers
@@ -8,10 +11,28 @@ namespace Desafio.MgContecnica.API.Controllers
     public class RelatoriosController : ControllerBase
     {
 
-        [HttpGet]
-        public async Task<IActionResult> RecuperarResumo()
+        private readonly IRelatorioService _relatorioService;
+
+        public RelatoriosController(IRelatorioService relatorioService)
         {
-            return Ok();
+            _relatorioService = relatorioService;   
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RecuperarResumo([FromQuery] FiltroRelatorioDto filtroDto)
+        {
+            try
+            {
+                var resumoRelatorio = await _relatorioService.ObterResumoAsync(filtroDto);
+
+                return Ok(RespostaPadraoApi<ResumoRelatorioDto>.Ok(resumoRelatorio));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, RespostaPadraoApi<object>.Falha("Erro interno no servidor"));
+            }
+           
         }
 
         [HttpGet("por-categoria")]

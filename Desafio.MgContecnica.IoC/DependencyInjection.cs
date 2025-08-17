@@ -16,8 +16,10 @@ namespace Desafio.MgContecnica.IoC
 
             services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
             services.AddScoped<ITransacaoRepositorio, TransacaoRepositorio>();
+            services.AddScoped<IRelatorioRepositorio, RelatorioRepositorio>();
             services.AddScoped<ICategoriaService,CategoriaService>();
             services.AddScoped<ITransacaoService, TransacaoService>();
+            services.AddScoped<IRelatorioService, RelatorioService>();
 
            services.AddDbContext<AppDbContext>(options =>
            options.UseSqlServer(configuration
