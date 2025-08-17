@@ -55,7 +55,7 @@ namespace Desafio.MgContecnica.API
                 {
                     Type = "string",
                     Format = "date",
-                    Example = OpenApiAnyFactory.CreateFromJson("\"2025-08-16\"")
+                    Example = OpenApiAnyFactory.CreateFromJson("\"yyyy-MM-dd\"")
                 });
             });
 

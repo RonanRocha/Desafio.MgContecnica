@@ -6,7 +6,7 @@ namespace Desafio.MgContecnica.Application.Mappings
 {
     public static class TransacaoMappingExtension
     {
-        // TransacaoDto -> Transacao
+ 
         public static Transacao ToEntity(this TransacaoDto dto)
         {
             var entity = new Transacao
@@ -21,8 +21,6 @@ namespace Desafio.MgContecnica.Application.Mappings
                  dto.DataUltimaAtualizacao,
                  new Categoria(dto.Categoria.Id, dto.Categoria.Nome, dto.Categoria.Status, dto.Categoria.Tipo, DateTime.UtcNow, DateTime.UtcNow)
             );
-
-     
 
             return entity;
         }
@@ -41,10 +39,9 @@ namespace Desafio.MgContecnica.Application.Mappings
             DataUltimaAtualizacao = DateTime.Now
         };
 
-        // Trasacao -> TransacaoDto
+
         public static TransacaoDto ToDto(this Transacao entity)
         {
-
 
             var dto = new TransacaoDto(
                 entity.Id,
@@ -59,11 +56,7 @@ namespace Desafio.MgContecnica.Application.Mappings
 
             );
 
-            return dto; 
+            return dto;
         }
-         
-           
-            
-
     }
 }

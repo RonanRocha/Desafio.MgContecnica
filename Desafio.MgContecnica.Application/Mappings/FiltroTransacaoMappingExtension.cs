@@ -10,8 +10,8 @@ namespace Desafio.MgContecnica.Application.Mappings
         new FiltroTransacao
         {
             Tipo = dto.Tipo,
-            DataFinal = dto.DataFinal,
-            DataInicial = dto.DataInicial,
+            DataFinal = dto.DataFinal?.ToDateTime(TimeOnly.MinValue),
+            DataInicial = dto.DataInicial?.ToDateTime(TimeOnly.MinValue),
             NumeroPagina = dto.NumeroPagina,
             TamanhoPagina = dto.TamanhoPagina,
             CategoriaId = dto.CategoriaId,

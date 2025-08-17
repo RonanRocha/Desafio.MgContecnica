@@ -74,9 +74,7 @@ namespace Desafio.MgContecnica.Application.Services
              var transacao = await _transacaoRepositorio.RecuperarTransacaoPorIdAsync(id);
              if (transacao == null) return null;
 
-             await _transacaoRepositorio.RemoverTransacaoAsync(transacao);
-             if (transacao == null) return null;
-                
+            await _transacaoRepositorio.RemoverTransacaoAsync(transacao);              
              return transacao?.ToDto();             
         }
     }
