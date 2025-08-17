@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Desafio.MgContecnica.Application.ValidationAttributes
 {
-    public class IsActiveAttribute : ValidationAttribute
+    public class CategoriaAtivaAttribute : ValidationAttribute
     {
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)

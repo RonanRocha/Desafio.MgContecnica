@@ -2,9 +2,9 @@
 
 namespace Desafio.MgContecnica.Application.ValidationAttributes
 {
-    public class DecimalGreaterThanZeroAttribute : ValidationAttribute
+    public class ValorMaiorQueZeroAttribute : ValidationAttribute
     {
-        public DecimalGreaterThanZeroAttribute() : base("O campo {0} deve ser maior que zero")
+        public ValorMaiorQueZeroAttribute() : base("O campo {0} deve ser maior que zero")
         {
         }
 

@@ -3,7 +3,7 @@ using Desafio.MgContecnica.Domain.Entities;
 
 namespace Desafio.MgContecnica.Application.Dto
 {
-    [DataRangeRequiredAttribute]
+    [FiltroDataTransacaoAttribute]
     public record FiltroTransacaoDto : FiltroPaginacaoDto
     {
         public TipoCategoria? Tipo { get; set; }

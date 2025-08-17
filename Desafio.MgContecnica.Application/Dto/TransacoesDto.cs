@@ -11,16 +11,16 @@ namespace Desafio.MgContecnica.Application.Dto
         string Descricao,
 
         [Required(ErrorMessage = "O Valor é obrigatório")]
-        [DecimalGreaterThanZero(ErrorMessage ="O Valor deve ser maior que zero")]
+        [ValorMaiorQueZero(ErrorMessage ="O Valor deve ser maior que zero")]
         decimal Valor,
 
         [Required(ErrorMessage = "A Data é obrigatório")]
-        [DateGreaterThanNow(ErrorMessage ="A Data não deve ser maior que a data atual")]
+        [DataMaiorQueDataAtual(ErrorMessage ="A Data não deve ser maior que a data atual")]
         DateOnly Data,
 
         [Required(ErrorMessage = "CategoriaId é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "O CategoriaId deve ser maior que 0")]
-        [IsActiveAttribute(ErrorMessage = "CategoriaId inválido")]
+        [CategoriaAtivaAttribute(ErrorMessage = "CategoriaId inválido")]
         int CategoriaId,
 
         string? Observacoes
@@ -33,16 +33,16 @@ namespace Desafio.MgContecnica.Application.Dto
         string Descricao,
 
         [Required(ErrorMessage = "O Valor é obrigatório")]
-        [DecimalGreaterThanZero(ErrorMessage ="O Valor deve ser maior que zero")]
+        [ValorMaiorQueZero(ErrorMessage ="O Valor deve ser maior que zero")]
         decimal Valor,
 
         [Required(ErrorMessage = "A Data é obrigatório")]
-        [DateGreaterThanNow(ErrorMessage ="A Data não deve ser maior que a data atual")]
+        [DataMaiorQueDataAtual(ErrorMessage ="A Data não deve ser maior que a data atual")]
         DateOnly Data,
 
         [Required(ErrorMessage = "CategoriaId é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "O CategoriaId deve ser maior que 0")]
-        [IsActiveAttribute(ErrorMessage = "CategoriaId inválido")]
+        [CategoriaAtivaAttribute(ErrorMessage = "CategoriaId inválido")]
         int CategoriaId,
 
         string? Observacoes

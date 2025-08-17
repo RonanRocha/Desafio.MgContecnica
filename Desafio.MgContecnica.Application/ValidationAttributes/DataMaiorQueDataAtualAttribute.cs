@@ -2,9 +2,9 @@
 
 namespace Desafio.MgContecnica.Application.ValidationAttributes
 {
-    public class DateGreaterThanNowAttribute : ValidationAttribute
+    public class DataMaiorQueDataAtualAttribute : ValidationAttribute
     {
-        public DateGreaterThanNowAttribute() :base("A campo {0} não pode ser maior que a data atual")
+        public DataMaiorQueDataAtualAttribute() :base("A campo {0} não pode ser maior que a data atual")
         {
         }
 

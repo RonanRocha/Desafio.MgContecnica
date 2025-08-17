@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Desafio.MgContecnica.Application.ValidationAttributes
 {
-    public class DataRangeRequiredAttribute : ValidationAttribute
+    public class FiltroDataTransacaoAttribute : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
