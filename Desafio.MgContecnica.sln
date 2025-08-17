@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.MgContecnica.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.MgContecnica.Infrastructure", "Desafio.MgContecnica.Infrastructure\Desafio.MgContecnica.Infrastructure.csproj", "{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.MgContecnica.Web", "Desafio.MgContecnica.Web\Desafio.MgContecnica.Web.csproj", "{B93598F8-B3CF-42D3-B8BD-E0C04C1DF957}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BCBA684-8A1C-49C3-85AF-FAE88C91D136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B93598F8-B3CF-42D3-B8BD-E0C04C1DF957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93598F8-B3CF-42D3-B8BD-E0C04C1DF957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B93598F8-B3CF-42D3-B8BD-E0C04C1DF957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B93598F8-B3CF-42D3-B8BD-E0C04C1DF957}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
