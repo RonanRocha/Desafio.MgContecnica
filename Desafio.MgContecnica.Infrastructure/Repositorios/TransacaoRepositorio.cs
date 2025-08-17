@@ -52,7 +52,7 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
 
             var total = await query.CountAsync();
 
-            var items = await query.OrderBy(t => t.Data)
+            var items = await query.OrderByDescending(t => t.Data)
                          .Skip((filtro.NumeroPagina.GetValueOrDefault() - 1) * filtro.TamanhoPagina.GetValueOrDefault())
                          .Take(filtro.TamanhoPagina.GetValueOrDefault())
                          .AsNoTracking().ToListAsync();

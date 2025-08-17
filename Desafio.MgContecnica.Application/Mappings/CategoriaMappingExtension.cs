@@ -33,8 +33,8 @@ namespace Desafio.MgContecnica.Application.Mappings
                 Nome = dto.Nome,
                 Status = dto.Status,
                 Tipo = dto.Tipo,
-                DataCriacao = DateTime.Now,
-                DataUltimaAtualizacao = DateTime.Now
+                DataCriacao = DateTime.UtcNow,
+                DataUltimaAtualizacao = DateTime.UtcNow
             };
 
 

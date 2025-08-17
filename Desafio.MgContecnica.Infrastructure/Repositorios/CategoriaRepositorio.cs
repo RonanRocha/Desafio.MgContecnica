@@ -1,4 +1,5 @@
 ﻿using Desafio.MgContecnica.Domain.Entities;
+using Desafio.MgContecnica.Domain.QueryFilters;
 using Desafio.MgContecnica.Domain.Repositorios;
 using Desafio.MgContecnica.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -34,9 +35,23 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
             return await _appDbContext.Categorias.FindAsync(id);
         }
 
-        public async Task<List<Categoria>> RecuperarTodasCategoriasAsync()
+        public async Task<(List<Categoria> Items, int Total)> RecuperarTodasCategoriasAsync(FiltroPaginacao filtro)
         {
-            return await _appDbContext.Categorias.ToListAsync();
+
+            var query = _appDbContext.Categorias
+                                    .AsQueryable();
+
+
+            var total = await query.CountAsync();
+
+            var items = await query.OrderByDescending(c => c.Id)
+                         .Skip((filtro.NumeroPagina.GetValueOrDefault() - 1) * filtro.TamanhoPagina.GetValueOrDefault())
+                         .Take(filtro.TamanhoPagina.GetValueOrDefault())
+                         .AsNoTracking().ToListAsync();
+
+            return (items, total);
+
+           
         }
 
         public async  Task<Categoria> RemoverCategoriaAsync(Categoria categoria)

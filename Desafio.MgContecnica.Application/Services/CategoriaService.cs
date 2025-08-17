@@ -1,6 +1,7 @@
 ﻿using Desafio.MgContecnica.Application.Dto;
 using Desafio.MgContecnica.Application.Interfaces;
 using Desafio.MgContecnica.Application.Mappings;
+using Desafio.MgContecnica.Application.Response;
 using Desafio.MgContecnica.Domain.Repositorios;
 
 namespace Desafio.MgContecnica.Application.Services
@@ -26,11 +27,22 @@ namespace Desafio.MgContecnica.Application.Services
            return categoria.ToDto();    
         }
 
-        public async Task<List<CategoriaDto>> RecuperarCategoriasAsync()
+        public async Task<PaginacaoResponse<List<CategoriaDto>>> RecuperarCategoriasAsync(FiltroPaginacaoDto filtroDto)
         {
-            var categorias = await _categoriaRepositorio.RecuperarTodasCategoriasAsync();
-            return categorias.Select(c => c.ToDto()).ToList();
-          
+
+            var categorias = new List<CategoriaDto>();
+
+            var result = await _categoriaRepositorio.RecuperarTodasCategoriasAsync(filtroDto.ToEntity());
+
+            if (result.Items.Any())
+            {
+                categorias = result.Items.Select(x => x.ToDto()).ToList();
+            }
+
+            var response = new PaginacaoResponse<List<CategoriaDto>>(categorias, result.Total, filtroDto.NumeroPagina.GetValueOrDefault(), filtroDto.TamanhoPagina.GetValueOrDefault());
+
+            return response;
+ 
         }
 
         public async Task RemoverCategoriaAsync(int id)

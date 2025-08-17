@@ -1,6 +1,7 @@
 ﻿using Desafio.MgContecnica.API.Response;
 using Desafio.MgContecnica.Application.Dto;
 using Desafio.MgContecnica.Application.Interfaces;
+using Desafio.MgContecnica.Application.Response;
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -19,18 +20,13 @@ namespace Desafio.MgContecnica.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> RecuperarTodas()
+        public async Task<IActionResult> RecuperarTodas([FromQuery] FiltroPaginacaoDto filtroDto)
         {
             try
             {
-                var categorias = await _categoriaService.RecuperarCategoriasAsync();
+                var categorias = await _categoriaService.RecuperarCategoriasAsync(filtroDto);
 
-                if (!categorias.Any())
-                {
-                    return NotFound(RespostaPadraoApi<object>.Falha("Nenhuma categoria foi encontrada"));
-                }
-
-                return Ok(RespostaPadraoApi<List<CategoriaDto>>.Ok(categorias, "Categorias listadas com sucesso"));
+                return Ok(RespostaPadraoApi<PaginacaoResponse<List<CategoriaDto>>>.Ok(categorias));
 
             }
             catch (Exception ex)
