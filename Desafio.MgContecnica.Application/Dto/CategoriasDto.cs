@@ -25,5 +25,13 @@ namespace Desafio.MgContecnica.Application.Dto
         StatusCategoria Status
     );
 
-    public record CategoriaDto(int Id, string Nome, TipoCategoria Tipo, StatusCategoria Status, DateTime DataCriacao, DateTime DataUltimaAtualizacao, List<TransacaoDto>? Transacoes);
+    public record CategoriaDto(
+        int Id,
+        string Nome,
+        TipoCategoria Tipo,
+        StatusCategoria Status,
+        DateTime DataCriacao,
+        DateTime DataUltimaAtualizacao,
+        List<TransacaoDto>? Transacoes
+    );
 }
