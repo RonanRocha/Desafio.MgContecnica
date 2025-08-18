@@ -24,6 +24,8 @@ namespace Desafio.MgContecnica.API.Controllers
         {
             try
             {
+                filtroDto.ValidarPaginacao();
+
                 var categorias = await _categoriaService.RecuperarCategoriasAsync(filtroDto);
 
                 return Ok(RespostaPadraoApi<PaginacaoResponse<List<CategoriaDto>>>.Ok(categorias));

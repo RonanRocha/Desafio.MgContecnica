@@ -15,10 +15,11 @@ namespace Desafio.MgContecnica.Web.Controllers
         }
 
 
-        public async Task<IActionResult> Index(int Pagina)
+        public async Task<IActionResult> Index(FiltroPaginacaoModel filtroPaginacao)
         {
+            filtroPaginacao.ValidarPaginacao();
 
-            var categorias = await _categoriaService.ObterCategoriasAsync();
+            var categorias = await _categoriaService.ObterCategoriasAsync(filtroPaginacao.Pagina.GetValueOrDefault(), filtroPaginacao.TamanhoPagina.GetValueOrDefault());
 
             var viewModel = new CategoriaViewModel
             {
