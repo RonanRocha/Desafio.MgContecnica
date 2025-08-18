@@ -1,0 +1,72 @@
+﻿@using Desafio.MgContecnica.Web.Models.Categorias
+
+@model CriarCategoriaModel
+
+
+@{
+    var isEdit = Model?.Id.HasValue ?? false;
+    var modalId = isEdit ? "modalEditarCategoria" : "modalCriarCategoria";
+    var formAction = isEdit ? "EditarCategoria" : "CriarCategoria";
+}
+
+
+
+
+<div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="@modalId + "Label"" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        
+
+            @using (Html.BeginForm(formAction, "Categorias", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate", id = "formCategoria" }))
+            {
+                @if(isEdit)
+                {
+                    @Html.HiddenFor(m => m.Id)
+                }
+                <div class="modal-header">
+                    <h5 class="modal-title" id="@modalId + "Label"">@((isEdit ? "Editar" : "Nova") + " Categoria")</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+
+                    @if (TempData["Erro"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["Erro"]</div>
+                    }
+
+                    <div class="mb-3">
+                        <label asp-for="Nome" class="form-label"></label>
+                        <input asp-for="Nome" class="form-control" />
+                        <span asp-validation-for="Nome" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Tipo" class="form-label"></label>
+
+                        <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoCategoriaModel>()">
+                            <option value="" selected>Selecionar</option>
+                        </select>
+         
+                        <span asp-validation-for="Tipo" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label"></label>
+
+                        <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<StatusCategoriaModel>()">
+                            <option value="" selected>Selecionar</option>
+                        </select>
+ 
+                        <span asp-validation-for="Status" class="invalid-feedback"></span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">@((isEdit ? "Salvar Alterações" : "Salvar"))</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

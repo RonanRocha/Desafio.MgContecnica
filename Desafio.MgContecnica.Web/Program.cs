@@ -1,3 +1,5 @@
+using Desafio.MgContecnica.Web.Services.Categorias;
+
 namespace Desafio.MgContecnica.Web
 {
     public class Program
@@ -8,6 +10,7 @@ namespace Desafio.MgContecnica.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpClient<CategoriaService>();
 
             var app = builder.Build();
 
@@ -28,7 +31,7 @@ namespace Desafio.MgContecnica.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
             app.Run();
         }

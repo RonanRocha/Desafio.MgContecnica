@@ -20,3 +20,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.input-validation-error {
+    border-color: #dc3545; /* vermelho bootstrap */
+}
+
+    .input-validation-error ~ .invalid-feedback {
+        display: block;
+    }
