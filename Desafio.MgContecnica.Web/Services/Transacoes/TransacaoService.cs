@@ -40,7 +40,7 @@ namespace Desafio.MgContecnica.Web.Services.Transacoes
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao consultar categorias");
+                _logger.LogError(ex, "Erro ao consultar transações");
                 throw;
             }
         }
@@ -61,7 +61,7 @@ namespace Desafio.MgContecnica.Web.Services.Transacoes
             return new RespostaPadraoModel<TransacaoModel>
             {
                 Sucesso = false,
-                Mensagem = "Erro ao cadastrar categoria."
+                Mensagem = "Erro ao cadastrar transação."
             };
         }
     }

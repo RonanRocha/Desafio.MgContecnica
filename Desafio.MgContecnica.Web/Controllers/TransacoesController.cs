@@ -11,16 +11,19 @@ namespace Desafio.MgContecnica.Web.Controllers
     {
 
         private readonly TransacaoService _transacaoService;
+        private readonly CategoriaService _categoriaService;
 
-        public TransacoesController(TransacaoService transacaoService)
+        public TransacoesController(TransacaoService transacaoService, CategoriaService categoriaService)
         {     
             _transacaoService = transacaoService;
+            _categoriaService = categoriaService;
         }
 
 
         public async Task<IActionResult> Index(FiltroTransacaoModel filtro)
         {
             var transacoes = await  _transacaoService.ObterTransacoesAsync(filtro);
+          
 
             var viewModel = new TransacaoViewModel
             {

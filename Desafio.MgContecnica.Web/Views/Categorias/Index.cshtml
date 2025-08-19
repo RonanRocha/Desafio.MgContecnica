@@ -22,63 +22,72 @@
 }
 
 
-@if (!Model.Categorias.Dados.Dados.Any()) {
-    <div class="alert alert-warning text-center" role="alert">
-        <i class="bi bi-exclamation-triangle-fill"></i>
-        Nenhum registro encontrado.
+<div class="card">
+    <div class="card-body">
+        @if (!Model.Categorias.Dados.Dados.Any())
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                Nenhum registro encontrado.
+            </div>
+        }
+        else
+        {
+            <table class="table" id="categoriasTable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Status</th>
+                        <th>Data Criação</th>
+                        <th>Data Atualização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var categoria in Model.Categorias.Dados.Dados)
+                    {
+                        <tr>
+                            <td>@categoria.Id</td>
+                            <td>@categoria.Nome</td>
+
+                            <td>
+                                @if (categoria.Tipo == TipoCategoriaModel.Receita)
+                                {
+                                    <span class="badge bg-success">Receita</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Despesa</span>
+                                }
+                            </td>
+
+                            <td>
+                                @if (categoria.Status == StatusCategoriaModel.Ativo)
+                                {
+                                    <span class="badge bg-primary">Ativo</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Inativo</span>
+                                }
+                            </td>
+
+                            <td>@(categoria.DataCriacao.ToString("dd/MM/yyyy"))</td>
+                            <td>@(categoria.DataUltimaAtualizacao.ToString("dd/MM/yyyy"))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @Html.Pager(Model.Categorias.Dados.PaginaAtual, Model.Categorias.Dados.TotalPaginas, "Index", new { TamanhoPagina = Model.Categorias.Dados.TamanhoPagina })
+
+        }
     </div>
-}else
-{
-    <table class="table" id="categoriasTable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Status</th>
-                <th>Data Criação</th>
-                <th>Data Atualização</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var categoria in Model.Categorias.Dados.Dados)
-            {
-                <tr>
-                    <td>@categoria.Id</td>
-                    <td>@categoria.Nome</td>
+</div>
 
-                    <td>
-                        @if (categoria.Tipo == TipoCategoriaModel.Receita)
-                        {
-                            <span class="badge bg-success">Receita</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-danger">Despesa</span>
-                        }
-                    </td>
 
-                    <td>
-                        @if (categoria.Status == StatusCategoriaModel.Ativo)
-                        {
-                            <span class="badge bg-primary">Ativo</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-secondary">Inativo</span>
-                        }
-                    </td>
 
-                    <td>@(categoria.DataCriacao.ToString("dd/MM/yyyy"))</td>
-                    <td>@(categoria.DataUltimaAtualizacao.ToString("dd/MM/yyyy"))</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    @Html.Pager(Model.Categorias.Dados.PaginaAtual, Model.Categorias.Dados.TotalPaginas, "Index" , new { TamanhoPagina = Model.Categorias.Dados.TamanhoPagina })
-
-}
 
 
 
