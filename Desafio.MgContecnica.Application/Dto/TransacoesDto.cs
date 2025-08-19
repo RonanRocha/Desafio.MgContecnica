@@ -57,7 +57,7 @@ namespace Desafio.MgContecnica.Application.Dto
         int CategoriaId,
         string Observacoes,
         DateTime DataCriacao,
-        DateTime DataUltimaAtualizacao,
+        DateTime? DataUltimaAtualizacao,
         CategoriaResumoDto Categoria
     );
 }

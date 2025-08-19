@@ -31,7 +31,7 @@ namespace Desafio.MgContecnica.Application.Dto
         TipoCategoria Tipo,
         StatusCategoria Status,
         DateTime DataCriacao,
-        DateTime DataUltimaAtualizacao,
+        DateTime? DataUltimaAtualizacao,
         List<TransacaoDto>? Transacoes
     );
 }

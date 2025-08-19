@@ -1,9 +1,9 @@
-﻿namespace Desafio.MgContecnica.Web.Models.Categorias
+﻿namespace Desafio.MgContecnica.Web.Models
 {
     public class FiltroPaginacaoModel
     {
         public int? Pagina { get; set; } = 1;
-        public int? TamanhoPagina { get; set; } = 100;
+        public int? TamanhoPagina { get; set; } = 25;
 
 
         public void ValidarPaginacao()

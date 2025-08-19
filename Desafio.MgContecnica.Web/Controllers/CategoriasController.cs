@@ -1,4 +1,5 @@
-﻿using Desafio.MgContecnica.Web.Models.Categorias;
+﻿using Desafio.MgContecnica.Web.Models;
+using Desafio.MgContecnica.Web.Models.Categorias;
 using Desafio.MgContecnica.Web.Services.Categorias;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;

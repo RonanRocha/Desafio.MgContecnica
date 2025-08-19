@@ -1,7 +1,10 @@
 
+using Bogus;
 using Desafio.MgContecnica.API.Converters;
 using Desafio.MgContecnica.API.Response;
+using Desafio.MgContecnica.Domain.Entities;
 using Desafio.MgContecnica.Infrastructure.Context;
+using Desafio.MgContecnica.Infrastructure.Seeds;
 using Desafio.MgContecnica.IoC;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -61,6 +64,9 @@ namespace Desafio.MgContecnica.API
 
             DependencyInjection.AddInfrastructure(builder.Services, builder.Configuration);
 
+
+       
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -68,6 +74,36 @@ namespace Desafio.MgContecnica.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+
+
+                using (var scope = app.Services.CreateScope())
+                {
+                    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                    context.Database.Migrate();
+
+                    var categorias = new List<Categoria>();
+                    var transacoes = new List<Transacao>();
+
+                    if (!context.Categorias.Any())
+                    {
+                        categorias = SeedData.GerarCategorias(100); // Bogus aqui
+                        context.Categorias.AddRange(categorias);
+                        context.SaveChanges();
+                    }
+
+                    if (!context.Transacoes.Any())
+                    {
+
+
+                        transacoes = SeedData.GerarTransacoes(categorias, 350);
+                        context.Transacoes.AddRange(transacoes);
+                        context.SaveChanges();
+
+
+                    }
+
+                }
+
             }
 
             app.UseHttpsRedirection();

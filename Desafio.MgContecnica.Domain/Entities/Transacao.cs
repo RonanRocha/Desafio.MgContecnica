@@ -11,7 +11,7 @@ namespace Desafio.MgContecnica.Domain.Entities
         public int CategoriaId { get; set; }
         public string? Observacoes { get; set; }
         public DateTime DataCriacao { get; set; }
-        public DateTime DataUltimaAtualizacao { get; set; }
+        public DateTime? DataUltimaAtualizacao { get; set; }
         public Categoria Categoria { get; set; }
 
 
@@ -20,7 +20,7 @@ namespace Desafio.MgContecnica.Domain.Entities
             
         }
 
-        public Transacao(int id, string descricao, decimal valor, DateTime data, int categoriaId, string observacoes, DateTime dataCriacao, DateTime dataUltimaAtualizacao, Categoria categoria)
+        public Transacao(int id, string descricao, decimal valor, DateTime data, int categoriaId, string observacoes, DateTime dataCriacao, DateTime? dataUltimaAtualizacao, Categoria categoria)
         {
             Id = id;
             Descricao = descricao;
@@ -43,7 +43,7 @@ namespace Desafio.MgContecnica.Domain.Entities
             DomainExceptionValidation.When(Valor <= 0, "Valor deve ser maior que zero");
             DomainExceptionValidation.When(Data.Date > DateTime.Now.Date, "A data da transacao não pode ser maior que a data atual");
             DomainExceptionValidation.When(DataCriacao.Date > DateTime.Now.Date, "A data de criação não pode ser maior que a data atual");
-            DomainExceptionValidation.When(DataUltimaAtualizacao.Date > DateTime.Now.Date, "A data da última atualização não pode ser maior que a data atual");
+            DomainExceptionValidation.When(DataUltimaAtualizacao?.Date > DateTime.Now.Date, "A data da última atualização não pode ser maior que a data atual");
         }
     }
 }
