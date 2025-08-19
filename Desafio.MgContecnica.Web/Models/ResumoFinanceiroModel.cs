@@ -1,4 +1,6 @@
-﻿namespace Desafio.MgContecnica.Web.Models
+﻿using Desafio.MgContecnica.Web.Models.Transacoes;
+
+namespace Desafio.MgContecnica.Web.Models
 {
     public class ResumoFinanceiroModel
     {

@@ -1,6 +1,6 @@
 ﻿using Desafio.MgContecnica.Web.Models.Categorias;
 
-namespace Desafio.MgContecnica.Web.Models
+namespace Desafio.MgContecnica.Web.Models.Transacoes
 {
     public class TransacaoModel
     {

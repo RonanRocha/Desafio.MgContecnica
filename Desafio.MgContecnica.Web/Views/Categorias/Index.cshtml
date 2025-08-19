@@ -75,11 +75,11 @@
             }
         </tbody>
     </table>
+
+    @Html.Pager(Model.Categorias.Dados.PaginaAtual, Model.Categorias.Dados.TotalPaginas, "Index" , new { TamanhoPagina = Model.Categorias.Dados.TamanhoPagina })
+
 }
 
-
-
-@Html.Pager(Model.Categorias.Dados.PaginaAtual, Model.Categorias.Dados.TotalPaginas, Model.Categorias.Dados.TamanhoPagina , "Index")
 
 
 <!-- Modal de criação -->

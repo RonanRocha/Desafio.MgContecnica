@@ -20,7 +20,7 @@ namespace Desafio.MgContecnica.Web.Controllers
         {
             filtroPaginacao.ValidarPaginacao();
 
-            var categorias = await _categoriaService.ObterCategoriasAsync(filtroPaginacao.Pagina.GetValueOrDefault(), filtroPaginacao.TamanhoPagina.GetValueOrDefault());
+            var categorias = await _categoriaService.ObterCategoriasAsync(filtroPaginacao.NumeroPagina.GetValueOrDefault(), filtroPaginacao.TamanhoPagina.GetValueOrDefault());
 
             var viewModel = new CategoriaViewModel
             {

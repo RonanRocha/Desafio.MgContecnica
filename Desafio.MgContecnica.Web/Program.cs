@@ -1,4 +1,5 @@
 using Desafio.MgContecnica.Web.Services.Categorias;
+using Desafio.MgContecnica.Web.Services.Transacoes;
 
 namespace Desafio.MgContecnica.Web
 {
@@ -11,7 +12,7 @@ namespace Desafio.MgContecnica.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpClient<CategoriaService>();
-
+            builder.Services.AddHttpClient<TransacaoService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

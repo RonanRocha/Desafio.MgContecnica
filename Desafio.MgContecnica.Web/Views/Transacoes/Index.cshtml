@@ -1,5 +1,123 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using Desafio.MgContecnica.Web.Helpers
+@using Desafio.MgContecnica.Web.Models.Transacoes
+@using Desafio.MgContecnica.Web.Models.Categorias
+
+
+@model TransacaoViewModel
+
+
+<div class="row mt-4 mb-4">
+    <h1> Transações</h1>
+</div>
+
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalCriarTransacao">
+        Nova Transação
+    </button>
+</div>
+
+
+
+@if (TempData["Sucesso"] != null)
+{
+    <div class="alert alert-success">@TempData["Sucesso"]</div>
 }
+
+
+@if (!Model.Transacoes.Dados.Dados.Any())
+{
+    <div class="alert alert-warning text-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        Nenhum registro encontrado.
+    </div>
+}
+else
+{
+    <table class="table" id="categoriasTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descricao</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Categoria</th>
+                <th>Tipo</th>
+                <th>Status Categoria</th>
+                <th>Data Criação</th>
+                <th>Data Atualização</th>
+                <th>Ações</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transacao in Model.Transacoes.Dados.Dados)
+            {
+                <tr>
+                    <td>@transacao.Id</td>
+                    <td>@transacao.Descricao</td>
+                    <td>@transacao.Valor.ToString("C")</td>
+                    <td>@transacao.Data.ToString("dd/MM/yyyy")</td>
+                    <td>@transacao.Categoria.Nome</td>
+
+                    <td>
+                        @if (transacao.Categoria.Tipo == TipoCategoriaModel.Receita)
+                        {
+                            <span class="badge bg-success">Receita</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Despesa</span>
+                        }
+                    </td>
+
+                    <td>
+                        @if (transacao.Categoria.Status == StatusCategoriaModel.Ativo)
+                        {
+                            <span class="badge bg-primary">Ativo</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inativo</span>
+                        }
+                    </td>
+
+                    <td>@(transacao.DataCriacao.ToString("dd/MM/yyyy"))</td>
+                    <td>@(transacao.DataUltimaAtualizacao.ToString("dd/MM/yyyy"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    @Html.Pager(Model.Transacoes.Dados.PaginaAtual, Model.Transacoes.Dados.TotalPaginas, "Index", Model.Filtro)
+}
+
+
+@await Html.PartialAsync("_FormTransacao", Model.CriarTransacaoModel)
+
+
+@section Scripts {
+
+
+    @if (ViewBag.MostrarModal != null && ViewBag.MostrarModal)
+    {
+        <script>
+            var myModal = new bootstrap.Modal(document.getElementById('modalCriarTransacao'));
+            myModal.show();
+        </script>
+    }
+
+    <script>
+        $(document).ready(function () {
+            $('.needs-validation').on('submit', function (e) {
+                var form = this;
+                if (!form.checkValidity()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(form).addClass('was-validated');
+                }
+            });
+        });
+    </script>
+}
+

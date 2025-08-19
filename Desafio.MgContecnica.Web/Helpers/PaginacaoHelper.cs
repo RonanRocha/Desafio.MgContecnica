@@ -9,7 +9,7 @@ namespace Desafio.MgContecnica.Web.Helpers
     public static class PaginationHelper
     {
 
-        public static IHtmlContent Pager(this IHtmlHelper html, int paginaAtual, int totalPaginas, int tamanhoPagina, string actionName, object? routeValues = null)
+        public static IHtmlContent Pager(this IHtmlHelper html, int paginaAtual, int totalPaginas, string actionName, object? routeValues = null)
         {
             if (totalPaginas <= 1) return HtmlString.Empty;
 
@@ -24,7 +24,7 @@ namespace Desafio.MgContecnica.Web.Helpers
             {
                 sb.AppendFormat(
                     "<li class='page-item'><a class='page-link' href='{0}' aria-label='Anterior'>&laquo;</a></li>",
-                    urlHelper.Action(actionName, MergeRouteValues(routeValues, new { Pagina = paginaAtual - 1 , TamanhoPagina = tamanhoPagina})));
+                    urlHelper.Action(actionName, MergeRouteValues(routeValues, new { NumeroPagina = paginaAtual - 1 })));
             }
             else
             {
@@ -42,7 +42,7 @@ namespace Desafio.MgContecnica.Web.Helpers
                     sb.AppendFormat("<li class='page-item active' aria-current='page'><span class='page-link'>{0}</span></li>", i);
                 else
                     sb.AppendFormat("<li class='page-item'><a class='page-link' href='{0}'>{1}</a></li>",
-                        urlHelper.Action(actionName, MergeRouteValues(routeValues, new { Pagina = i , TamanhoPagina = tamanhoPagina })), i);
+                        urlHelper.Action(actionName, MergeRouteValues(routeValues, new { NumeroPagina = i })), i);
             }
 
             // Botão "Próximo"
@@ -50,7 +50,7 @@ namespace Desafio.MgContecnica.Web.Helpers
             {
                 sb.AppendFormat(
                     "<li class='page-item'><a class='page-link' href='{0}' aria-label='Próximo'>&raquo;</a></li>",
-                    urlHelper.Action(actionName, MergeRouteValues(routeValues, new { Pagina = paginaAtual + 1 , TamanhoPagina = tamanhoPagina })));
+                    urlHelper.Action(actionName, MergeRouteValues(routeValues, new { NumeroPagina = paginaAtual + 1 })));
             }
             else
             {
