@@ -10,11 +10,8 @@ namespace Desafio.MgContecnica.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
-            var cultureInfo = new CultureInfo("pt-BR");
-
-            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("pt-BR");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("pt-BR");
 
 
             // Add services to the container.

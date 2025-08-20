@@ -1,4 +1,5 @@
-﻿using Desafio.MgContecnica.Web.Models;
+﻿using Desafio.MgContecnica.Web.Helpers;
+using Desafio.MgContecnica.Web.Models;
 using Desafio.MgContecnica.Web.Models.Categorias;
 using System.Text.Json;
 
@@ -18,11 +19,11 @@ namespace Desafio.MgContecnica.Web.Services.Categorias
 
 
 
-        public async Task<RespostaPadraoModel<List<CategoriaModel>>> ObterCategoriasAsync(int numeroPagina = 1, int tamanhoPagina = 100)
+        public async Task<RespostaPadraoModel<List<CategoriaModel>>> ObterCategoriasAsync(FiltroPaginacaoModel? filtro = null)
         {
             try
             {
-                var url = $"https://localhost:44372/api/Categorias?NumeroPagina={numeroPagina}&TamanhoPagina={tamanhoPagina}";
+                var url = UrlBuilderHelper.MontarUrlComQuery("https://localhost:44372/api/Categorias", filtro);
 
                 var response = await _httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();

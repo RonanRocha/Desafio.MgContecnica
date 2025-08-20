@@ -11,13 +11,13 @@
                 <div class="col-md-12">
                     <form method="GET" asp-action="Index">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-2 mb-2">
                                 <select asp-for="Filtro.Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoCategoriaModel>()">
                                     <option value="" selected>Selecionar</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <div class="input-group">
+                                <div class="input-group mb-2">
                                     <input asp-for="Filtro.DataInicial" type="text" class="form-control datepicker" id="data" placeholder="dd/mm/yyyy">
                                     <span class="input-group-text">
                                         <i class="bi bi-calendar-date"></i> <!-- ícone do Bootstrap Icons -->
@@ -25,22 +25,24 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="input-group">
+                                <div class="input-group mb-2">
                                     <input asp-for="Filtro.DataFinal" type="text" class="form-control datepicker" id="data" placeholder="dd/mm/yyyy">
                                     <span class="input-group-text">
                                         <i class="bi bi-calendar-date"></i> <!-- ícone do Bootstrap Icons -->
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <select asp-for="Filtro.CategoriaId" class="form-select">
-                                    <option value="" selected>Selecionar</option>
-                                    <option value="">Teste</option>
-                                    <option value="">Teste 2</option>
-                                </select>
+                            <div class="col-md-4 mb-2">
+                                <div class="input-group">
+                                    <select asp-for="Filtro.CategoriaId" class="form-select select-customizado">
+                                        <option value="" selected>Selecionar</option>
+                                        <option value="">Teste</option>
+                                        <option value="">Teste 2</option>
+                                    </select>
+                                </div>                      
                             </div>
                             <div class="col-md-2">
-                                <div class="input-group">
+                                <div class="input-group mb-2">
                                     <button class="btn btn-primary">Pesquisar</button>
                                 </div>
                             </div>

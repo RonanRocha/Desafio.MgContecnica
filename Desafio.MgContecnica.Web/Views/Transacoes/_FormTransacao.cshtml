@@ -1,5 +1,74 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Desafio.MgContecnica.Web.Models.Transacoes
+
+@model CriarTransacaoModel
+
+
 @{
+    var isEdit = Model?.Id.HasValue ?? false;
+    var modalId = isEdit ? "modalEditarTransacao" : "modalCriarTransacao";
+    var formAction = isEdit ? "EditarTransacao" : "CriarTransacao";
 }
+
+
+
+
+<div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="@modalId + " Label"" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+
+            @using (Html.BeginForm(formAction, "Transacoes", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate", id = "formTransacao" }))
+            {
+                @if (isEdit)
+                {
+                    @Html.HiddenFor(m => m.Id)
+                }
+                <div class="modal-header">
+                    <h5 class="modal-title" id="@modalId + " Label"">@((isEdit ? "Editar" : "Nova") + " Transação")</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+
+                    @if (TempData["Erro"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["Erro"]</div>
+                    }
+
+                    <div class="mb-3">
+                        <label asp-for="Descricao" class="form-label"></label>
+                        <input asp-for="Descricao" class="form-control" />
+                        <span asp-validation-for="Descricao" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Valor" class="form-label"></label>
+                        <input asp-for="Valor" class="form-control" type="number"/>
+                        <span asp-validation-for="Valor" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Data" class="form-label"></label>
+                        <input asp-for="Data" type="text" class="form-control datepicker" id="data" placeholder="dd/mm/yyyy">
+                        <span asp-validation-for="Data" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label  class="form-label"> Categoria</label>
+
+                        <select asp-for="CategoriaId" class="form-select">
+                            <option value="" selected>Selecionar</option>
+                        </select>
+
+                        <span asp-validation-for="CategoriaId" class="invalid-feedback"></span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">@((isEdit ? "Salvar Alterações" : "Salvar"))</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

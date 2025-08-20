@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Desafio.MgContecnica.Web.Models.Transacoes
 {
@@ -11,10 +12,11 @@ namespace Desafio.MgContecnica.Web.Models.Transacoes
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O Valor é obrigatório")]
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "A Data é obrigatório")]
-        public DateTime Data { get; set; }
+        public DateOnly? Data { get; set; }
 
         [Required(ErrorMessage = "CategoriaId é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "O CategoriaId deve ser maior que 0")]

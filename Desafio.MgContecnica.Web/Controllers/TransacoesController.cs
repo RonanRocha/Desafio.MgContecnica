@@ -25,8 +25,9 @@ namespace Desafio.MgContecnica.Web.Controllers
 
             try
             {
-                var transacoes = await _transacaoService.ObterTransacoesAsync(filtro);
+                filtro.ValidarPaginacao();
 
+                var transacoes = await _transacaoService.ObterTransacoesAsync(filtro);
 
                 var viewModel = new TransacaoViewModel
                 {

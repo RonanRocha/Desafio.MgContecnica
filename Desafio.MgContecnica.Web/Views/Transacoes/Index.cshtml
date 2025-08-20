@@ -22,9 +22,7 @@
 </div>
 
 
-
 @await Html.PartialAsync("_FiltroTransacao", Model)
-
 
 
 @if (TempData["Sucesso"] != null)
@@ -45,64 +43,74 @@ else
 
     <div class="card mt-5">
         <div class="card-body">
-            <table class="table" id="categoriasTable">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Descricao</th>
-                        <th>Valor</th>
-                        <th>Data</th>
-                        <th>Categoria</th>
-                        <th>Tipo</th>
-                        <th>Status Categoria</th>
-                        <th>Data Criação</th>
-                        <th>Data Atualização</th>
-                        <th>Ações</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var transacao in Model.Transacoes.Dados.Dados)
-                    {
-                        <tr>
-                            <td>@transacao.Id</td>
-                            <td>@transacao.Descricao</td>
-                            <td>@transacao.Valor.ToString("C")</td>
-                            <td>@transacao.Data.ToString("dd/MM/yyyy")</td>
-                            <td>@transacao.Categoria.Nome</td>
+            <div class="row">
 
-                            <td>
-                                @if (transacao.Categoria.Tipo == TipoCategoriaModel.Receita)
-                                {
-                                    <span class="badge bg-success">Receita</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-danger">Despesa</span>
-                                }
-                            </td>
+                <div class="table-responsive">
+                    <table class="table" id="categoriasTable">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Descricao</th>
+                                <th>Valor</th>
+                                <th>Data</th>
+                                <th>Categoria</th>
+                                <th>Tipo</th>
+                                <th>Status Categoria</th>
+                                <th>Data Criação</th>
+                                <th>Data Atualização</th>
+                                <th>Ações</th>
 
-                            <td>
-                                @if (transacao.Categoria.Status == StatusCategoriaModel.Ativo)
-                                {
-                                    <span class="badge bg-primary">Ativo</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">Inativo</span>
-                                }
-                            </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var transacao in Model.Transacoes.Dados.Dados)
+                            {
+                                <tr>
+                                    <td>@transacao.Id</td>
+                                    <td>@transacao.Descricao</td>
+                                    <td>@transacao.Valor.ToString("C")</td>
+                                    <td>@transacao.Data.ToString("dd/MM/yyyy")</td>
+                                    <td>@transacao.Categoria.Nome</td>
 
-                            <td>@(transacao.DataCriacao.ToString("dd/MM/yyyy"))</td>
-                            <td>@(transacao.DataUltimaAtualizacao.ToString("dd/MM/yyyy"))</td>
-                            <td>
-                                <button class="btn btn-primary">Editar</button>
-                                <button class="btn btn-danger">Remover</button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                    <td>
+                                        @if (transacao.Categoria.Tipo == TipoCategoriaModel.Receita)
+                                        {
+                                            <span class="badge bg-success">Receita</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Despesa</span>
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @if (transacao.Categoria.Status == StatusCategoriaModel.Ativo)
+                                        {
+                                            <span class="badge bg-primary">Ativo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Inativo</span>
+                                        }
+                                    </td>
+
+                                    <td>@(transacao.DataCriacao.ToString("dd/MM/yyyy"))</td>
+                                    <td>@(transacao.DataUltimaAtualizacao.ToString("dd/MM/yyyy"))</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Remover</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+              
+            </div>
+
+        
 
 
             @Html.Pager(Model.Filtro.NumeroPagina.GetValueOrDefault(), Model.Transacoes.Dados.TotalPaginas, "Index", Model.Filtro)
@@ -120,6 +128,7 @@ else
 
     <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <script src="~/lib/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+    <script src="~/lib/select2/js/select2.min.js"></script>
 
 
 
@@ -150,6 +159,14 @@ else
                 language: 'pt-BR',   // aqui define o idioma
                 orientation: "bottom"
             });
+
+
+            $('.select-customizado').select2({
+                theme: 'bootstrap-5',   // usa o tema adaptado para BS5
+                placeholder: "Selecione uma categoria",
+                allowClear: true
+            });
+
 
         });
     </script>
