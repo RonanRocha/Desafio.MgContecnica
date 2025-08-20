@@ -19,7 +19,7 @@ namespace Desafio.MgContecnica.Web.Services.Categorias
 
 
 
-        public async Task<RespostaPadraoModel<List<CategoriaModel>>> ObterCategoriasAsync(FiltroPaginacaoModel? filtro = null)
+        public async Task<RespostaPadraoModel<List<CategoriaModel>>> ObterCategoriasAsync(FiltroCategoriaModel? filtro = null)
         {
             try
             {

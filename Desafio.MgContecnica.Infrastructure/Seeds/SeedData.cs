@@ -10,7 +10,7 @@ namespace Desafio.MgContecnica.Infrastructure.Seeds
         {
             var faker = new Faker<Categoria>("pt_BR")
                 .RuleFor(c => c.Id, f => 0) // EF vai gerar o Id
-                .RuleFor(c => c.Nome, f => f.Commerce.Categories(1)[0])
+                .RuleFor(c => c.Nome, f => f.Commerce.Categories(1)[f.UniqueIndex % 20])
                 .RuleFor(c => c.Tipo, f => f.PickRandom<TipoCategoria>())
                 .RuleFor(c => c.Status, f => f.PickRandom<StatusCategoria>())
                 .RuleFor(c => c.DataCriacao, f => f.Date.Past(2))

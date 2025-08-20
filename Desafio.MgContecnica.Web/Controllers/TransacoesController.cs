@@ -47,5 +47,20 @@ namespace Desafio.MgContecnica.Web.Controllers
             }
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> BuscarCategorias(string busca)
+        {
+
+            var categorias = await _categoriaService.ObterCategoriasAsync(new FiltroCategoriaModel { Busca = busca });
+
+            if(categorias.Sucesso)
+            {
+                return Json(new { results = categorias.Dados.Dados });
+            }
+
+            return Json(new { results = new List<CategoriaModel>() });
+
+        }
     }
 }

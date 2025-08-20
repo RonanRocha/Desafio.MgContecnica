@@ -161,11 +161,49 @@ else
             });
 
 
+            // $('.select-customizado').select2({
+            //     theme: 'bootstrap-5',   // usa o tema adaptado para BS5
+            //     placeholder: "Selecione uma categoria",
+            //     allowClear: true
+            // });
+
+
             $('.select-customizado').select2({
                 theme: 'bootstrap-5',   // usa o tema adaptado para BS5
                 placeholder: "Selecione uma categoria",
-                allowClear: true
+                allowClear: true,
+                ajax: {
+                    url: '@Url.Action("BuscarCategorias", "Transacoes")',
+                    dataType: 'json',
+                    delay: 500,
+                    data: function (params) {
+                        return {
+                            busca: params.term // valor digitado pelo usuário
+                        };
+                    },
+                    processResults: function (data) {
+
+
+                        var mapped = data.results.map(function (item) {
+                            return {
+                                id: item.id,
+                                text: item.nome,
+                                tipo: item.tipo // opcional, só se precisar depois
+                            };
+                        });
+             
+
+                        return {
+                           
+                            results: mapped
+                        };
+                    },
+                    cache: true
+                }
             });
+
+
+
 
 
         });
