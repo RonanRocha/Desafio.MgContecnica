@@ -5,7 +5,7 @@ namespace Desafio.MgContecnica.Application.Interfaces
 {
     public interface ICategoriaService
     {
-        Task<PaginacaoResponse<List<CategoriaDto>>> RecuperarCategoriasAsync(FiltroPaginacaoDto filtroDto);
+        Task<PaginacaoResponse<List<CategoriaDto>>> RecuperarCategoriasAsync(FiltroCategoriaDto filtroDto);
         Task<CategoriaDto> RecuperarCategoriaPorIdAsync(int id);
         Task<CategoriaDto> CriarCategoriaAsync(CriarCategoriaDto categoriaDto);
         Task AtualizarCategoriaAsync(CategoriaDto categoriaDto);

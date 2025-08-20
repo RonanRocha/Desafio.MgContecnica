@@ -20,7 +20,7 @@ namespace Desafio.MgContecnica.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> RecuperarTodas([FromQuery] FiltroPaginacaoDto filtroDto)
+        public async Task<IActionResult> RecuperarTodas([FromQuery] FiltroCategoriaDto filtroDto)
         {
             try
             {

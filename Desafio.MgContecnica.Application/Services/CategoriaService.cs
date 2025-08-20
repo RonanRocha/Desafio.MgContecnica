@@ -27,7 +27,7 @@ namespace Desafio.MgContecnica.Application.Services
            return categoria.ToDto();    
         }
 
-        public async Task<PaginacaoResponse<List<CategoriaDto>>> RecuperarCategoriasAsync(FiltroPaginacaoDto filtroDto)
+        public async Task<PaginacaoResponse<List<CategoriaDto>>> RecuperarCategoriasAsync(FiltroCategoriaDto filtroDto)
         {
 
             var categorias = new List<CategoriaDto>();

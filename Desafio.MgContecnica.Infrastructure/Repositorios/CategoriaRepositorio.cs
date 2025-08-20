@@ -35,11 +35,16 @@ namespace Desafio.MgContecnica.Infrastructure.Repositorios
             return await _appDbContext.Categorias.FindAsync(id);
         }
 
-        public async Task<(List<Categoria> Items, int Total)> RecuperarTodasCategoriasAsync(FiltroPaginacao filtro)
+        public async Task<(List<Categoria> Items, int Total)> RecuperarTodasCategoriasAsync(FiltroCategoria filtro)
         {
 
             var query = _appDbContext.Categorias
                                     .AsQueryable();
+
+            if(!string.IsNullOrEmpty(filtro.Busca))
+            {
+                query = query.Where(c => c.Nome.Contains(filtro.Busca));
+            }
 
 
             var total = await query.CountAsync();
