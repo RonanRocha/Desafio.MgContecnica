@@ -21,7 +21,7 @@ namespace Desafio.MgContecnica.Web.Services.Transacoes
             _httpClient = httpClient;
         }
 
-        public async Task<RespostaPadraoModel<List<TransacaoModel>>> ObterTransacoesAsync(FiltroTransacaoModel filtro)
+        public async Task<RespostaPadraoPaginadaModel<List<TransacaoModel>>> ObterTransacoesAsync(FiltroTransacaoModel? filtro = null)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Desafio.MgContecnica.Web.Services.Transacoes
 
                 var stream = await response.Content.ReadAsStreamAsync();
 
-                var resultado = await JsonSerializer.DeserializeAsync<RespostaPadraoModel<List<TransacaoModel>>>(
+                var resultado = await JsonSerializer.DeserializeAsync<RespostaPadraoPaginadaModel<List<TransacaoModel>>>(
                     stream,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
@@ -46,12 +46,32 @@ namespace Desafio.MgContecnica.Web.Services.Transacoes
             }
         }
 
-        public async Task<RespostaPadraoModel<TransacaoModel>> CriarTransacaoAsync(CriarTransacaoModel model)
+        public async Task<RespostaPadraoPaginadaModel<TransacaoModel>> CriarTransacaoAsync(CriarTransacaoModel model)
         {
 
             var url = $"https://localhost:44372/api/Transacoes/";
 
             var response = await _httpClient.PostAsJsonAsync(url, model);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultado = await response.Content.ReadFromJsonAsync<RespostaPadraoPaginadaModel<TransacaoModel>>();
+                return resultado!;
+            }
+
+            return new RespostaPadraoPaginadaModel<TransacaoModel>
+            {
+                Sucesso = false,
+                Mensagem = "Erro ao cadastrar transação."
+            };
+        }
+
+        public async Task<RespostaPadraoModel<TransacaoModel>> RemoverTransacaoAsync(int id)
+        {
+          
+            var url = $"https://localhost:44372/api/Transacoes/{id}";
+
+            var response = await _httpClient.DeleteAsync(url);
 
             if (response.IsSuccessStatusCode)
             {
@@ -62,8 +82,29 @@ namespace Desafio.MgContecnica.Web.Services.Transacoes
             return new RespostaPadraoModel<TransacaoModel>
             {
                 Sucesso = false,
-                Mensagem = "Erro ao cadastrar transação."
+                Mensagem = "Erro ao remover transação."
             };
         }
+
+        public async Task<RespostaPadraoModel<TransacaoModel>> RecuperarTransacaoPorId(int id)
+        {
+
+            var url = $"https://localhost:44372/api/Transacoes/{id}";
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultado = await response.Content.ReadFromJsonAsync<RespostaPadraoModel<TransacaoModel>>();
+                return resultado!;
+            }
+
+            return new RespostaPadraoModel<TransacaoModel>
+            {
+                Sucesso = false,
+                Mensagem = "Erro ao remover transação."
+            };
+        }
+
     }
 }

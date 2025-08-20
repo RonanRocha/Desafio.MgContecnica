@@ -98,8 +98,8 @@ else
                                     <td>@(transacao.DataCriacao.ToString("dd/MM/yyyy"))</td>
                                     <td>@(transacao.DataUltimaAtualizacao.ToString("dd/MM/yyyy"))</td>
                                     <td>
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Remover</button>
+                                        <button class="btn btn-primary btn-editar" data-id="@transacao.Id">Editar</button>
+                                        <button class="btn btn-danger btn-remover"  data-id="@transacao.Id">Remover</button>
                                     </td>
                                 </tr>
                             }
@@ -122,6 +122,11 @@ else
 
 
 @await Html.PartialAsync("_FormTransacao", Model.CriarTransacaoModel)
+
+<div  id="modalContainer">
+  
+</div>
+
 
 
 @section Scripts {
@@ -203,7 +208,125 @@ else
             });
 
 
+            $('.select-form-modal').select2({
+                theme: 'bootstrap-5',   // usa o tema adaptado para BS5
+                placeholder: "Selecione uma categoria",
+                dropdownParent: $('.modal'),
+                allowClear: true,
+                ajax: {
+                    url: '@Url.Action("BuscarCategorias", "Transacoes")',
+                    dataType: 'json',
+                    delay: 500,
+                    data: function (params) {
+                        return {
+                            busca: params.term // valor digitado pelo usuário
+                        };
+                    },
+                    processResults: function (data) {
 
+
+                        var mapped = data.results.map(function (item) {
+                            return {
+                                id: item.id,
+                                text: item.nome,
+                                tipo: item.tipo // opcional, só se precisar depois
+                            };
+                        });
+
+
+                        return {
+
+                            results: mapped
+                        };
+                    },
+                    cache: true
+                }
+            });
+
+
+            $(document).on('click', '.btn-remover', function () {
+                var id = $(this).data('id');
+
+                if (confirm("Deseja realmente remover esta transação?")) {
+                    $.ajax({
+                        url: '@Url.Action("DeletarTransacao", "Transacoes")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function () {
+                            location.reload(); // recarrega a página após remover
+                        },
+                        error: function () {
+                            alert("Ocorreu um erro ao tentar remover a transação.");
+                        }
+                    });
+                }
+            });
+
+
+            // Abrir modal de edição
+            $(document).on('click', '.btn-editar', function () {
+                var id = $(this).data('id');
+
+                $.get('@Url.Action("Editar", "Transacoes")', { id: id }, function (html) {
+
+                    $('#modalContainer').html(html);
+
+                    // reativa o select2 dentro do modal
+                    $('.select-form-modal').select2({
+                        theme: 'bootstrap-5',
+                        dropdownParent: $('#modalEditarTransacao'),
+                        allowClear: true,
+                        ajax: {
+                            url: '@Url.Action("BuscarCategorias", "Transacoes")',
+                            dataType: 'json',
+                            delay: 500,
+                            data: function (params) {
+                                return {
+                                    busca: params.term // valor digitado pelo usuário
+                                };
+                            },
+                            processResults: function (data) {
+
+
+                                var mapped = data.results.map(function (item) {
+                                    return {
+                                        id: item.id,
+                                        text: item.nome,
+                                        tipo: item.tipo // opcional, só se precisar depois
+                                    };
+                                });
+
+
+                                return {
+
+                                    results: mapped
+                                };
+                            },
+                            cache: true
+                        }
+                    });
+
+                    var modal = new bootstrap.Modal(document.getElementById('modalEditarTransacao'));
+                    modal.show();
+                });
+            });
+
+            // Submit edição via AJAX
+            $(document).on('submit', '#formEditarTransacao', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '@Url.Action("Editar", "Transacoes")',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function () {
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("Erro ao editar transação.");
+                    }
+                });
+            });
 
 
         });

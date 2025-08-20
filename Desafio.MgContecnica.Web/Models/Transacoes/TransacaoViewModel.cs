@@ -12,6 +12,6 @@ namespace Desafio.MgContecnica.Web.Models.Transacoes
         public CriarTransacaoModel CriarTransacaoModel { get; set; }
 
         [BindProperty]
-        public RespostaPadraoModel<List<TransacaoModel>> Transacoes { get; set; }
+        public RespostaPadraoPaginadaModel<List<TransacaoModel>> Transacoes { get; set; }
     }
 }

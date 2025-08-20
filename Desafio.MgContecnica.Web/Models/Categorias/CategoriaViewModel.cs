@@ -8,6 +8,6 @@ namespace Desafio.MgContecnica.Web.Models.Categorias
         public CriarCategoriaModel CriarCategoriaModel { get; set; }
 
         [BindProperty]
-        public RespostaPadraoModel<List<CategoriaModel>> Categorias { get; set; }
+        public RespostaPadraoPaginadaModel<List<CategoriaModel>> Categorias { get; set; }
     }
 }

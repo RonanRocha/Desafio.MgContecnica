@@ -21,7 +21,8 @@ namespace Desafio.MgContecnica.Web.Models.Transacoes
         [Required(ErrorMessage = "CategoriaId é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "O CategoriaId deve ser maior que 0")]
         public int CategoriaId { get; set; }
-        public string Observacoes { get; set; }
+
+        public string? Observacoes { get; set; }
 
     }
 }

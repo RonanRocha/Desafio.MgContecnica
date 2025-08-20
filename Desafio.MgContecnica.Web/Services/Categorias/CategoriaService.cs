@@ -19,7 +19,7 @@ namespace Desafio.MgContecnica.Web.Services.Categorias
 
 
 
-        public async Task<RespostaPadraoModel<List<CategoriaModel>>> ObterCategoriasAsync(FiltroCategoriaModel? filtro = null)
+        public async Task<RespostaPadraoPaginadaModel<List<CategoriaModel>>> ObterCategoriasAsync(FiltroCategoriaModel? filtro = null)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Desafio.MgContecnica.Web.Services.Categorias
 
                 var stream = await response.Content.ReadAsStreamAsync();
 
-                var resultado = await JsonSerializer.DeserializeAsync<RespostaPadraoModel<List<CategoriaModel>>>(
+                var resultado = await JsonSerializer.DeserializeAsync<RespostaPadraoPaginadaModel<List<CategoriaModel>>>(
                     stream,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
@@ -43,7 +43,7 @@ namespace Desafio.MgContecnica.Web.Services.Categorias
             }
         }
 
-        public async Task<RespostaPadraoModel<CategoriaModel>> CriarCategoriaAsync(CriarCategoriaModel model)
+        public async Task<RespostaPadraoPaginadaModel<CategoriaModel>> CriarCategoriaAsync(CriarCategoriaModel model)
         {
 
             var url = $"https://localhost:44372/api/Categorias/";
@@ -52,11 +52,11 @@ namespace Desafio.MgContecnica.Web.Services.Categorias
 
             if (response.IsSuccessStatusCode)
             {
-                var resultado = await response.Content.ReadFromJsonAsync<RespostaPadraoModel<CategoriaModel>>();
+                var resultado = await response.Content.ReadFromJsonAsync<RespostaPadraoPaginadaModel<CategoriaModel>>();
                 return resultado!;
             }
 
-            return new RespostaPadraoModel<CategoriaModel>
+            return new RespostaPadraoPaginadaModel<CategoriaModel>
             {
                 Sucesso = false,
                 Mensagem = "Erro ao cadastrar categoria."
