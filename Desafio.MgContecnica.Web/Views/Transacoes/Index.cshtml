@@ -21,46 +21,9 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-body">
-       <div class="row">
-           <div class="col-md-12">
-               <div class="row">
-                    <div class="col-md-2">
-                        <select asp-for="Filtro.Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoCategoriaModel>()">
-                            <option value="" selected>Selecionar</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <input asp-for="Filtro.DataInicial" type="text" class="form-control datepicker" id="data" placeholder="dd/mm/yyyy">
-                            <span class="input-group-text">
-                                <i class="bi bi-calendar-date"></i> <!-- ícone do Bootstrap Icons -->
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <input asp-for="Filtro.DataFinal" type="text" class="form-control datepicker" id="data" placeholder="dd/mm/yyyy">
-                            <span class="input-group-text">
-                                <i class="bi bi-calendar-date"></i> <!-- ícone do Bootstrap Icons -->
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <select asp-for="Filtro.CategoriaId" class="form-select">
-                            <option value="" selected>Selecionar</option>
-                            <option value="">Teste</option>
-                            <option value="">Teste 2</option>
-                        </select>
-                    </div>
-               </div>
-           </div>
-       </div>
-    </div>
-</div>
 
 
+@await Html.PartialAsync("_FiltroTransacao", Model)
 
 
 
@@ -70,72 +33,83 @@
 }
 
 
-@if (!Model.Transacoes.Dados.Dados.Any())
+@if (!Model.Transacoes?.Dados?.Dados?.Any() ?? true)
 {
-    <div class="alert alert-warning text-center" role="alert">
+    <div class="alert alert-warning text-center mt-5" role="alert">
         <i class="bi bi-exclamation-triangle-fill"></i>
         Nenhum registro encontrado.
     </div>
 }
 else
 {
-    <table class="table" id="categoriasTable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Descricao</th>
-                <th>Valor</th>
-                <th>Data</th>
-                <th>Categoria</th>
-                <th>Tipo</th>
-                <th>Status Categoria</th>
-                <th>Data Criação</th>
-                <th>Data Atualização</th>
-                <th>Ações</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var transacao in Model.Transacoes.Dados.Dados)
-            {
-                <tr>
-                    <td>@transacao.Id</td>
-                    <td>@transacao.Descricao</td>
-                    <td>@transacao.Valor.ToString("C")</td>
-                    <td>@transacao.Data.ToString("dd/MM/yyyy")</td>
-                    <td>@transacao.Categoria.Nome</td>
+    <div class="card mt-5">
+        <div class="card-body">
+            <table class="table" id="categoriasTable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descricao</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                        <th>Categoria</th>
+                        <th>Tipo</th>
+                        <th>Status Categoria</th>
+                        <th>Data Criação</th>
+                        <th>Data Atualização</th>
+                        <th>Ações</th>
 
-                    <td>
-                        @if (transacao.Categoria.Tipo == TipoCategoriaModel.Receita)
-                        {
-                            <span class="badge bg-success">Receita</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-danger">Despesa</span>
-                        }
-                    </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transacao in Model.Transacoes.Dados.Dados)
+                    {
+                        <tr>
+                            <td>@transacao.Id</td>
+                            <td>@transacao.Descricao</td>
+                            <td>@transacao.Valor.ToString("C")</td>
+                            <td>@transacao.Data.ToString("dd/MM/yyyy")</td>
+                            <td>@transacao.Categoria.Nome</td>
 
-                    <td>
-                        @if (transacao.Categoria.Status == StatusCategoriaModel.Ativo)
-                        {
-                            <span class="badge bg-primary">Ativo</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-secondary">Inativo</span>
-                        }
-                    </td>
+                            <td>
+                                @if (transacao.Categoria.Tipo == TipoCategoriaModel.Receita)
+                                {
+                                    <span class="badge bg-success">Receita</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Despesa</span>
+                                }
+                            </td>
 
-                    <td>@(transacao.DataCriacao.ToString("dd/MM/yyyy"))</td>
-                    <td>@(transacao.DataUltimaAtualizacao.ToString("dd/MM/yyyy"))</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                            <td>
+                                @if (transacao.Categoria.Status == StatusCategoriaModel.Ativo)
+                                {
+                                    <span class="badge bg-primary">Ativo</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Inativo</span>
+                                }
+                            </td>
+
+                            <td>@(transacao.DataCriacao.ToString("dd/MM/yyyy"))</td>
+                            <td>@(transacao.DataUltimaAtualizacao.ToString("dd/MM/yyyy"))</td>
+                            <td>
+                                <button class="btn btn-primary">Editar</button>
+                                <button class="btn btn-danger">Remover</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
 
-    @Html.Pager(Model.Transacoes.Dados.PaginaAtual, Model.Transacoes.Dados.TotalPaginas, "Index", Model.Filtro)
+            @Html.Pager(Model.Filtro.NumeroPagina.GetValueOrDefault(), Model.Transacoes.Dados.TotalPaginas, "Index", Model.Filtro)
+        </div>
+    </div>
+
+
 }
 
 
@@ -170,7 +144,7 @@ else
 
 
             $('.datepicker').datepicker({
-                format: 'dd/mm/yyyy',
+                format: 'yyyy-mm-dd',
                 todayHighlight: true,
                 autoclose: true,
                 language: 'pt-BR',   // aqui define o idioma

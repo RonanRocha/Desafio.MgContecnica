@@ -1,5 +1,6 @@
 using Desafio.MgContecnica.Web.Services.Categorias;
 using Desafio.MgContecnica.Web.Services.Transacoes;
+using System.Globalization;
 
 namespace Desafio.MgContecnica.Web
 {
@@ -8,6 +9,13 @@ namespace Desafio.MgContecnica.Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+
+            var cultureInfo = new CultureInfo("pt-BR");
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

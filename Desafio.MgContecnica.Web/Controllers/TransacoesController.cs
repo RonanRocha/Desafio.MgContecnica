@@ -14,7 +14,7 @@ namespace Desafio.MgContecnica.Web.Controllers
         private readonly CategoriaService _categoriaService;
 
         public TransacoesController(TransacaoService transacaoService, CategoriaService categoriaService)
-        {     
+        {
             _transacaoService = transacaoService;
             _categoriaService = categoriaService;
         }
@@ -22,17 +22,29 @@ namespace Desafio.MgContecnica.Web.Controllers
 
         public async Task<IActionResult> Index(FiltroTransacaoModel filtro)
         {
-            var transacoes = await  _transacaoService.ObterTransacoesAsync(filtro);
-          
 
-            var viewModel = new TransacaoViewModel
+            try
             {
-                Transacoes = transacoes,
-                CriarTransacaoModel = new CriarTransacaoModel(),
-                Filtro = filtro ?? new FiltroTransacaoModel()
-            };
+                var transacoes = await _transacaoService.ObterTransacoesAsync(filtro);
 
-            return View(viewModel);
+
+                var viewModel = new TransacaoViewModel
+                {
+                    Transacoes = transacoes,
+                    CriarTransacaoModel = new CriarTransacaoModel(),
+                    Filtro = filtro ?? new FiltroTransacaoModel()
+                };
+
+                return View(viewModel);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Erro interno no servidor");
+            }
+
         }
     }
 }

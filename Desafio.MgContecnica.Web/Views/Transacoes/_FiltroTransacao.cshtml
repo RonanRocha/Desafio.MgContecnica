@@ -1,0 +1,53 @@
+﻿@using Desafio.MgContecnica.Web.Models.Transacoes
+@using Desafio.MgContecnica.Web.Models.Categorias
+
+@model TransacaoViewModel
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="GET" asp-action="Index">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <select asp-for="Filtro.Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoCategoriaModel>()">
+                                    <option value="" selected>Selecionar</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input asp-for="Filtro.DataInicial" type="text" class="form-control datepicker" id="data" placeholder="dd/mm/yyyy">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calendar-date"></i> <!-- ícone do Bootstrap Icons -->
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input asp-for="Filtro.DataFinal" type="text" class="form-control datepicker" id="data" placeholder="dd/mm/yyyy">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calendar-date"></i> <!-- ícone do Bootstrap Icons -->
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <select asp-for="Filtro.CategoriaId" class="form-select">
+                                    <option value="" selected>Selecionar</option>
+                                    <option value="">Teste</option>
+                                    <option value="">Teste 2</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <button class="btn btn-primary">Pesquisar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

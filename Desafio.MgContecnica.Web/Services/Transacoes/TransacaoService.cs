@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using Desafio.MgContecnica.Web.Models.Transacoes;
 using Desafio.MgContecnica.Web.Helpers;
+using System.Net;
 
 namespace Desafio.MgContecnica.Web.Services.Transacoes
 {
@@ -28,13 +29,13 @@ namespace Desafio.MgContecnica.Web.Services.Transacoes
                 var url = UrlBuilderHelper.MontarUrlComQuery("https://localhost:44372/api/Transacoes", filtro);
 
                 var response = await _httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
 
                 var stream = await response.Content.ReadAsStreamAsync();
 
                 var resultado = await JsonSerializer.DeserializeAsync<RespostaPadraoModel<List<TransacaoModel>>>(
                     stream,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
 
                 return resultado;
             }
